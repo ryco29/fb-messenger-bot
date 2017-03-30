@@ -4,6 +4,7 @@ import json
 
 import requests
 from flask import Flask, request
+from wit import Wit
 
 app = Flask(__name__)
 
@@ -21,6 +22,36 @@ def verify():
 
 
 @app.route('/', methods=['POST'])
+
+def send(request, response):
+    print('Sending to user...', response['text'])
+def my_action(request):
+    print('Received from user...', request['text'])
+
+actions = {
+    'send': send,
+    'my_action': my_action,
+}
+
+
+
+client = Wit(access_token="YOUR_CLIENT_ACCESS_TOKEN", actions=actions)
+
+def wit_bit(message_text, sender_id):
+    resp = client.message(message_text)
+
+    if(resp["entities"] != {}):
+        if(resp["entities"]["intent"][0]["value"] == "greetings"):
+            print("Hey! How can I help you?")
+            send_message(sender_id, "Hey! How can I help you?")
+
+        else:
+            print("I'm to dumb to understand complex sentences.")
+            send_message(sender_id, "I'm dumb sometimes. Maybe start by saying Hello?")
+    else:
+        print("I'm to dumb to understand complex sentences.")
+        send_message(sender_id, "I'm dumb sometimes. Maybe start by saying Hello?")
+
 def webhook():
 
     # endpoint for processing incoming messaging events
@@ -40,6 +71,14 @@ def webhook():
                     message_text = messaging_event["message"]["text"]  # the message's text
 
                     send_message(sender_id, "got it, thanks!")
+
+                if messaging_event.get("How are you?"):
+
+                    sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
+                    recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
+                    message_text = messaging_event["message"]["text"]  # the message's text
+
+                    send_message(sender_id, "Quite well, thank you.")
 
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
