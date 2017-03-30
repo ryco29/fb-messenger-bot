@@ -8,7 +8,6 @@ from flask import Flask, request
 
 app = Flask(__name__)
 
-# client = Wit(access_token=os.environ["PAGE_ACCESS_TOKEN"], actions=actions)
 
 @app.route('/', methods=['GET'])
 def verify():
@@ -24,15 +23,17 @@ def verify():
 
 @app.route('/', methods=['POST'])
 
-# def send(request, response):
-#     print('Sending to user...', response['text'])
-# def my_action(request):
-#     print('Received from user...', request['text'])
+def send(request, response):
+    print('Sending to user...', response['text'])
+def my_action(request):
+    print('Received from user...', request['text'])
 
-# actions = {
-#     'send': send,
-#     'my_action': my_action,
-# }
+actions = {
+    'send': send,
+    'my_action': my_action,
+}
+
+client = Wit(access_token=os.environ["PAGE_ACCESS_TOKEN"], actions=actions)
 
 def webhook():
 
