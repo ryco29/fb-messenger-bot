@@ -3,8 +3,8 @@ import sys
 import json
 
 import requests
-# from wit import Wit
 from flask import Flask, request
+# from wit import Wit
 
 app = Flask(__name__)
 
