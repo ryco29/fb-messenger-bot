@@ -4,7 +4,7 @@ import json
 
 import requests
 from flask import Flask, request
-from wit import Wit
+# from wit import Wit
 
 app = Flask(__name__)
 
