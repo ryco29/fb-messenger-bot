@@ -3,8 +3,8 @@ import sys
 import json
 
 import requests
+from wit import Wit
 from flask import Flask, request
-# from wit import Wit
 
 app = Flask(__name__)
 
@@ -33,7 +33,7 @@ def verify():
 #     'my_action': my_action,
 # }
 
-client = Wit(access_token=os.environ["PAGE_ACCESS_TOKEN"], actions=actions)
+# client = Wit(access_token=os.environ["PAGE_ACCESS_TOKEN"], actions=actions)
 
 def webhook():
 
