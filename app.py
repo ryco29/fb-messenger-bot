@@ -8,6 +8,7 @@ from flask import Flask, request
 
 app = Flask(__name__)
 
+client = Wit(access_token=os.environ["PAGE_ACCESS_TOKEN"], actions=actions)
 
 @app.route('/', methods=['GET'])
 def verify():
@@ -22,6 +23,16 @@ def verify():
 
 
 @app.route('/', methods=['POST'])
+
+def send(request, response):
+    print('Sending to user...', response['text'])
+def my_action(request):
+    print('Received from user...', request['text'])
+
+actions = {
+    'send': send,
+    'my_action': my_action,
+}
 
 def webhook():
 
@@ -78,18 +89,6 @@ def send_message(recipient_id, message_text):
         log(r.status_code)
         log(r.text)
 
-def send(request, response):
-    print('Sending to user...', response['text'])
-def my_action(request):
-    print('Received from user...', request['text'])
-
-actions = {
-    'send': send,
-    'my_action': my_action,
-}
-
-
-client = Wit(access_token=os.environ["PAGE_ACCESS_TOKEN"], actions=actions)
 
 def wit_bit(message_text, sender_id):
     resp = client.message(message_text)
@@ -105,6 +104,7 @@ def wit_bit(message_text, sender_id):
     else:
         print("I'm to dumb to understand complex sentences.")
         send_message(sender_id, "I'm dumb sometimes. Maybe start by saying Hello?")
+
 
 def log(message):  # simple wrapper for logging to stdout on heroku
     print str(message)
