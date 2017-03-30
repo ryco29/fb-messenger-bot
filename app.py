@@ -35,7 +35,7 @@ actions = {
 
 
 
-client = Wit(access_token="YOUR_CLIENT_ACCESS_TOKEN", actions=actions)
+client = Wit(access_token="EAALPHNRKPocBAB54r0m23kZBauR0sbQNraG2NLZByjr0lIWEgabFjqY1qrbMiiaqr5FvBRCcRLbUYtRMIVFsWEhrYgEOoZC9ZAZCcLKS74ph7V8q1kmsvokH8gXBzXcRsjgEgzzUZBFk6SUHqPDzHFMEmYmKQ08I8TTnrO5iJkWwZDZD", actions=actions)
 
 def wit_bit(message_text, sender_id):
     resp = client.message(message_text)
