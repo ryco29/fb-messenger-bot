@@ -23,10 +23,10 @@ def verify():
 
 @app.route('/', methods=['POST'])
 
-def send(request, response):
-    print('Sending to user...', response['text'])
-def my_action(request):
-    print('Received from user...', request['text'])
+# def send(request, response):
+#     print('Sending to user...', response['text'])
+# def my_action(request):
+#     print('Received from user...', request['text'])
 
 # actions = {
 #     'send': send,
