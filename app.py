@@ -28,12 +28,12 @@ def send(request, response):
 def my_action(request):
     print('Received from user...', request['text'])
 
-actions = {
-    'send': send,
-    'my_action': my_action,
-}
+# actions = {
+#     'send': send,
+#     'my_action': my_action,
+# }
 
-client = Wit(access_token=os.environ["PAGE_ACCESS_TOKEN"], actions=actions)
+# client = Wit(access_token=os.environ["PAGE_ACCESS_TOKEN"], actions=actions)
 
 def webhook():
 
